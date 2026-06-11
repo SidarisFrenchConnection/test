@@ -551,11 +551,13 @@ h2 em{ color:var(--magenta); font-style:italic;}
   display:grid;
   grid-template-columns:1.1fr 1fr;
   gap:28px;
-  align-items:stretch;
+  align-items:start;  /* évite que le grid étire la colonne portrait au-delà de sa largeur */
 }
 @media (max-width:780px){ .playmate{ grid-template-columns:1fr; } }
 .portrait{
   position:relative;
+  width:100%;
+  max-width:100%;
   aspect-ratio:3/4;
   background:
     radial-gradient(ellipse at 50% 30%, #ffd9b3 0%, #ffb27a 30%, transparent 60%),
@@ -764,7 +766,7 @@ footer .ribbon{
   margin-bottom:12px;
 }
 
-/* logo placeholder (si ton image n'est pas présente) */
+/* logo rond (avatar) */
 .logo-spot{
   display:flex;
   align-items:center;
@@ -772,13 +774,54 @@ footer .ribbon{
   margin-bottom:4px;
 }
 .logo-spot .badge{
-  width:52px; height:52px; border-radius:50%;
-  background:radial-gradient(circle, #fff2c8, #ffaa55 60%, #ff3d6e);
-  box-shadow:0 0 0 2px var(--gold-deep) inset, 0 0 30px rgba(255,80,140,.5);
-  display:flex; align-items:center; justify-content:center;
-  font-family:"Monoton", serif;
-  color:#3a1a14;
-  font-size:22px;
+  width:72px; height:72px; border-radius:50%;
+  overflow:hidden;
+  box-shadow:
+    0 0 0 2px var(--gold-deep) inset,
+    0 0 0 4px rgba(247,230,200,.9),
+    0 0 0 5px var(--magenta),
+    0 0 30px rgba(255,80,140,.55),
+    0 6px 14px rgba(0,0,0,.45);
+  flex-shrink:0;
+}
+.logo-spot .badge img{
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+/* bannière du haut */
+.top-banner{
+  position:relative;
+  margin:14px 0 0;
+  border:1px solid rgba(168,120,34,.45);
+  box-shadow:
+    inset 0 0 60px rgba(0,0,0,.45),
+    0 18px 40px rgba(0,0,0,0.5);
+  overflow:hidden;
+}
+.top-banner img{
+  width:100%;
+  display:block;
+  aspect-ratio: 32 / 9;
+  object-fit:cover;
+  object-position:center;
+  filter:contrast(1.05) saturate(1.1);
+}
+.top-banner::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    linear-gradient(180deg, rgba(26,11,58,0.25) 0%, rgba(26,11,58,0.0) 25%, rgba(26,11,58,0.0) 70%, rgba(26,11,58,0.55) 100%),
+    repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0 2px, rgba(0,0,0,.18) 3px, rgba(0,0,0,0) 4px);
+  pointer-events:none;
+  mix-blend-mode:multiply;
+}
+.top-banner::after{
+  content:"";
+  position:absolute; left:0; right:0; bottom:-1px; height:6px;
+  background:repeating-linear-gradient(90deg, var(--hot-pink) 0 12px, var(--sunset-1) 12px 24px, var(--gold) 24px 36px);
+  opacity:.95;
 }
 
 </style>
@@ -811,6 +854,11 @@ footer .ribbon{
     <span>Été 1987 · 12 F</span>
   </div>
 
+  <!-- BANNIÈRE -->
+  <div class="top-banner">
+    <img src="https://customer-assets.emergentagent.com/job_bullets-babes-retro/artifacts/6apl8psh_banniere%20sd.jpg" alt="Sidaris French Connection — bannière">
+  </div>
+
   <!-- COVER -->
   <section class="cover">
     <div class="cover-flags">
@@ -819,7 +867,7 @@ footer .ribbon{
     </div>
 
     <div class="logo-spot">
-      <div class="badge">S</div>
+      <div class="badge"><img src="https://customer-assets.emergentagent.com/job_bullets-babes-retro/artifacts/oslad25x_LOGO%20DONA%204.png" alt="Logo Sidaris French Connection"></div>
       <div class="cover-brand">Sidaris &nbsp;·&nbsp; French &nbsp;·&nbsp; Connection</div>
     </div>
 
@@ -1079,3 +1127,4 @@ footer .ribbon{
 
 </body>
 </html>
+
