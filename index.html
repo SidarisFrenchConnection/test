@@ -1,0 +1,1086 @@
+Voilà le fichier en entier (1081 lignes / 33 Ko). Tu peux tout copier-coller dans un fichier `sidaris.html` chez toi.
+Action: file_editor view /app/output/sidaris.html
+Observation: [Showing lines 1-1082 of 1082 total] /app/output/sidaris.html:
+1|<!DOCTYPE html>
+2|<html lang="fr">
+3|<head>
+4|<meta charset="UTF-8">
+5|<meta name="viewport" content="width=device-width, initial-scale=1.0">
+6|<title>Sidaris French Connection — Issue N°08 / Summer Heat</title>
+7|
+8|<link rel="preconnect" href="https://fonts.googleapis.com">
+9|<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+10|<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,600;0,800;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Monoton&family=VT323&display=swap" rel="stylesheet">
+11|
+12|<style>
+13|/* =========================================================
+14|   PALETTE — Sunset Hawaï Sexy / Playboy 80s
+15|========================================================= */
+16|:root{
+17|  --ink:#1a0e0a;
+18|  --paper:#f7e6c8;
+19|  --paper-warm:#efd4a3;
+20|  --hot-pink:#ff2e88;
+21|  --neon-pink:#ff3d8a;
+22|  --magenta:#c2185b;
+23|  --sunset-1:#ff8a3c;   /* orange chaud */
+24|  --sunset-2:#ff3d6e;   /* rose corail */
+25|  --sunset-3:#7a1a6b;   /* violet profond */
+26|  --sunset-4:#1a0b3a;   /* nuit indigo */
+27|  --gold:#e7b34a;
+28|  --gold-deep:#a87822;
+29|  --palm:#0b1a14;
+30|  --cyan-vhs:#21d4fd;
+31|}
+32|
+33|*{box-sizing:border-box}
+34|
+35|html,body{
+36|  margin:0;
+37|  padding:0;
+38|  background:#0a0610;
+39|  color:var(--ink);
+40|  font-family:"Cormorant Garamond", "Times New Roman", serif;
+41|  font-weight:400;
+42|  font-size:18px;
+43|  line-height:1.6;
+44|  overflow-x:hidden;
+45|  cursor:default;
+46|}
+47|
+48|/* =========================================================
+49|   FOND — Sunset hawaïen procédural (pas d'images)
+50|========================================================= */
+51|.sky{
+52|  position:fixed;
+53|  inset:0;
+54|  z-index:0;
+55|  background:
+56|    radial-gradient(ellipse 80% 60% at 50% 78%, rgba(255,138,60,0.55) 0%, rgba(255,61,110,0.35) 25%, rgba(122,26,107,0.0) 55%),
+57|    radial-gradient(circle at 50% 78%, #ffd27a 0%, #ff8a3c 8%, #ff3d6e 22%, #c2185b 38%, #7a1a6b 58%, #2a0d3d 78%, #0a0610 100%);
+58|  background-blend-mode:screen, normal;
+59|}
+60|
+61|/* soleil */
+62|.sun{
+63|  position:fixed;
+64|  left:50%;
+65|  bottom:18vh;
+66|  transform:translateX(-50%);
+67|  width:38vmin;
+68|  height:38vmin;
+69|  border-radius:50%;
+70|  background:radial-gradient(circle, #fff2c8 0%, #ffd27a 30%, #ffaa55 60%, #ff7a3c 90%);
+71|  box-shadow:
+72|    0 0 60px rgba(255,200,120,0.6),
+73|    0 0 140px rgba(255,120,80,0.5),
+74|    0 0 260px rgba(255,80,140,0.35);
+75|  z-index:1;
+76|  filter:saturate(1.1);
+77|}
+78|.sun::before, .sun::after{
+79|  content:"";
+80|  position:absolute;
+81|  left:-10%;
+82|  width:120%;
+83|  background:#0a0610;
+84|  filter:blur(0.5px);
+85|}
+86|.sun::before{ top:38%; height:3px; box-shadow:0 14px 0 #0a0610, 0 32px 0 #0a0610, 0 54px 0 #0a0610; opacity:.85;}
+87|.sun::after { top:60%; height:2px; box-shadow:0 10px 0 #0a0610, 0 24px 0 #0a0610; opacity:.55;}
+88|
+89|/* océan + reflet */
+90|.ocean{
+91|  position:fixed;
+92|  left:0; right:0; bottom:0;
+93|  height:32vh;
+94|  z-index:2;
+95|  background:
+96|    linear-gradient(to bottom, rgba(10,6,16,0.0) 0%, rgba(10,6,16,0.35) 60%, rgba(10,6,16,0.85) 100%),
+97|    repeating-linear-gradient(to bottom,
+98|      rgba(255,180,120,0.0) 0px,
+99|      rgba(255,180,120,0.0) 6px,
+100|      rgba(255,180,120,0.18) 7px,
+101|      rgba(255,180,120,0.0) 9px),
+102|    linear-gradient(to bottom, #c2185b 0%, #7a1a6b 50%, #1a0b3a 100%);
+103|  background-blend-mode:overlay, screen, normal;
+104|}
+105|
+106|/* palmiers silhouettes (CSS pur, sans images) */
+107|.palms{
+108|  position:fixed;
+109|  inset:0;
+110|  z-index:3;
+111|  pointer-events:none;
+112|}
+113|.palm{
+114|  position:absolute;
+115|  bottom:18vh;
+116|  width:6px;
+117|  background:linear-gradient(to top, #0a0610 0%, #1a0b14 100%);
+118|  border-radius:3px 3px 0 0;
+119|  transform-origin:bottom center;
+120|}
+121|.palm::before, .palm::after{
+122|  content:"";
+123|  position:absolute;
+124|  top:-6px;
+125|  width:90px;
+126|  height:14px;
+127|  background:radial-gradient(ellipse at left center, #0a0610 0%, #0a0610 55%, transparent 60%);
+128|  border-radius:50%;
+129|}
+130|.palm::before{ left:-2px; transform:rotate(-28deg); }
+131|.palm::after { left:-82px; transform:rotate(28deg) scaleX(-1); }
+132|.palm i{
+133|  position:absolute;
+134|  top:-4px;
+135|  width:90px;
+136|  height:12px;
+137|  background:radial-gradient(ellipse at left center, #0a0610 0%, #0a0610 55%, transparent 60%);
+138|  border-radius:50%;
+139|  display:block;
+140|}
+141|.palm i:nth-child(1){ left:-2px;  transform:rotate(-8deg);}
+142|.palm i:nth-child(2){ left:-82px; transform:rotate(8deg) scaleX(-1);}
+143|.palm i:nth-child(3){ left:-2px;  transform:rotate(-50deg);}
+144|.palm i:nth-child(4){ left:-82px; transform:rotate(50deg) scaleX(-1);}
+145|
+146|.palm-1{ left:6%;  height:180px; transform:rotate(-3deg);}
+147|.palm-2{ left:14%; height:130px; transform:rotate(2deg);  opacity:.85;}
+148|.palm-3{ right:8%; height:200px; transform:rotate(4deg);}
+149|.palm-4{ right:18%;height:150px; transform:rotate(-2deg); opacity:.85;}
+150|
+151|/* =========================================================
+152|   GRAIN — SVG fractalNoise (réaliste, pas une texture plate)
+153|========================================================= */
+154|.grain{
+155|  position:fixed;
+156|  inset:-50%;
+157|  width:200%;
+158|  height:200%;
+159|  z-index:90;
+160|  pointer-events:none;
+161|  opacity:.22;
+162|  mix-blend-mode:overlay;
+163|  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='280' height='280'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.6' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.9 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+164|  animation:grainShift 0.6s steps(6) infinite;
+165|}
+166|@keyframes grainShift{
+167|  0%   { transform:translate(0,0); }
+168|  17%  { transform:translate(-5%,3%); }
+169|  33%  { transform:translate(4%,-4%); }
+170|  50%  { transform:translate(-3%,2%); }
+171|  67%  { transform:translate(2%,5%); }
+172|  83%  { transform:translate(-4%,-2%); }
+173|  100% { transform:translate(0,0); }
+174|}
+175|
+176|/* scanlines fines */
+177|.scanlines{
+178|  position:fixed;
+179|  inset:0;
+180|  z-index:91;
+181|  pointer-events:none;
+182|  background:repeating-linear-gradient(
+183|    to bottom,
+184|    rgba(0,0,0,0.0) 0px,
+185|    rgba(0,0,0,0.0) 2px,
+186|    rgba(0,0,0,0.18) 3px,
+187|    rgba(0,0,0,0.0) 4px
+188|  );
+189|  mix-blend-mode:multiply;
+190|  opacity:.45;
+191|}
+192|
+193|/* lueur RVB et vignettage */
+194|.vignette{
+195|  position:fixed;
+196|  inset:0;
+197|  z-index:92;
+198|  pointer-events:none;
+199|  background:
+200|    radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.55) 100%),
+201|    radial-gradient(ellipse at center, transparent 60%, rgba(122,26,107,0.25) 100%);
+202|  mix-blend-mode:multiply;
+203|}
+204|
+205|/* =========================================================
+206|   BARRE DE TRACKING VHS RÉALISTE
+207|========================================================= */
+208|.vhs-bar{
+209|  position:fixed;
+210|  left:0; right:0;
+211|  top:-220px;
+212|  height:180px;
+213|  z-index:95;
+214|  pointer-events:none;
+215|  mix-blend-mode:screen;
+216|  background:
+217|    linear-gradient(to bottom,
+218|      rgba(255,255,255,0) 0%,
+219|      rgba(255,255,255,0.04) 35%,
+220|      rgba(255,255,255,0.22) 48%,
+221|      rgba(255,255,255,0.45) 50%,
+222|      rgba(255,255,255,0.22) 52%,
+223|      rgba(255,255,255,0.04) 65%,
+224|      rgba(255,255,255,0) 100%),
+225|    repeating-linear-gradient(to bottom,
+226|      rgba(255,255,255,0.0) 0px,
+227|      rgba(255,255,255,0.0) 3px,
+228|      rgba(255,255,255,0.08) 4px,
+229|      rgba(255,255,255,0.0) 5px);
+230|  filter:blur(0.6px);
+231|  animation:trackPass 9s linear infinite;
+232|}
+233|.vhs-bar::before{
+234|  content:"";
+235|  position:absolute;
+236|  left:0; right:0;
+237|  top:45%;
+238|  height:18%;
+239|  background:linear-gradient(90deg,
+240|    rgba(33,212,253,0.25),
+241|    rgba(255,255,255,0.5),
+242|    rgba(255,61,138,0.25));
+243|  mix-blend-mode:screen;
+244|  filter:blur(2px);
+245|  animation:trackJitter 0.18s steps(2) infinite;
+246|}
+247|@keyframes trackPass{
+248|  0%   { top:-220px; }
+249|  90%  { top:110vh; }
+250|  100% { top:110vh; }
+251|}
+252|@keyframes trackJitter{
+253|  0%   { transform:translateX(-3px) skewX(-1deg); }
+254|  50%  { transform:translateX(3px)  skewX(1deg); }
+255|  100% { transform:translateX(-3px) skewX(-1deg); }
+256|}
+257|
+258|/* drift global + chromatic aberration occasionnelle */
+259|.frame{
+260|  position:relative;
+261|  z-index:5;
+262|  animation:vhsDrift 12s infinite;
+263|}
+264|@keyframes vhsDrift{
+265|  0%,88%   { transform:translate(0,0) skew(0deg); filter:none; }
+266|  89%      { transform:translate(2px,0) skew(0.2deg); filter:hue-rotate(-6deg) saturate(1.1); }
+267|  90%      { transform:translate(-3px,1px) skew(-0.3deg); filter:hue-rotate(8deg) saturate(1.2); }
+268|  91%      { transform:translate(2px,-1px); filter:none; }
+269|  92%,100% { transform:translate(0,0); filter:none; }
+270|}
+271|
+272|/* glitch ponctuel sur les titres */
+273|.glitch{
+274|  position:relative;
+275|  display:inline-block;
+276|}
+277|.glitch::before, .glitch::after{
+278|  content:attr(data-text);
+279|  position:absolute;
+280|  left:0; top:0;
+281|  width:100%;
+282|  overflow:hidden;
+283|  pointer-events:none;
+284|}
+285|.glitch::before{
+286|  color:var(--cyan-vhs);
+287|  transform:translate(-2px,0);
+288|  mix-blend-mode:screen;
+289|  clip-path:inset(0 0 55% 0);
+290|  animation:glitchA 5.5s infinite steps(1);
+291|}
+292|.glitch::after{
+293|  color:var(--hot-pink);
+294|  transform:translate(2px,0);
+295|  mix-blend-mode:screen;
+296|  clip-path:inset(55% 0 0 0);
+297|  animation:glitchB 5.5s infinite steps(1);
+298|}
+299|@keyframes glitchA{
+300|  0%,96% { transform:translate(0,0); opacity:0; }
+301|  96.5%  { transform:translate(-3px,0); opacity:.9; }
+302|  97%    { transform:translate(2px,1px); opacity:.6; }
+303|  97.5%  { transform:translate(-2px,-1px); opacity:.9; }
+304|  98%,100%{ transform:translate(0,0); opacity:0; }
+305|}
+306|@keyframes glitchB{
+307|  0%,96% { transform:translate(0,0); opacity:0; }
+308|  96.5%  { transform:translate(3px,1px); opacity:.9; }
+309|  97%    { transform:translate(-2px,-1px); opacity:.6; }
+310|  97.5%  { transform:translate(2px,0); opacity:.9; }
+311|  98%,100%{ transform:translate(0,0); opacity:0; }
+312|}
+313|
+314|/* =========================================================
+315|   POUSSIÈRE
+316|========================================================= */
+317|.dust{
+318|  position:fixed;
+319|  width:2px; height:2px;
+320|  background:rgba(255,235,200,0.7);
+321|  border-radius:50%;
+322|  pointer-events:none;
+323|  z-index:88;
+324|  box-shadow:0 0 4px rgba(255,210,160,0.6);
+325|  filter:blur(0.3px);
+326|  animation:dustFloat linear infinite;
+327|}
+328|.dust.big{ width:3px; height:3px; opacity:.6; }
+329|.dust.tiny{ width:1px; height:1px; opacity:.9; }
+330|@keyframes dustFloat{
+331|  0%   { transform:translate(0,100vh) scale(1); opacity:0; }
+332|  10%  { opacity:.7; }
+333|  50%  { transform:translate(20px,50vh) scale(1); }
+334|  90%  { opacity:.4; }
+335|  100% { transform:translate(-30px,-10vh) scale(0.8); opacity:0; }
+336|}
+337|
+338|/* =========================================================
+339|   STRUCTURE MAGAZINE
+340|========================================================= */
+341|.frame{
+342|  max-width:980px;
+343|  margin:0 auto;
+344|  padding:40px 28px 80px;
+345|}
+346|
+347|/* ===== Top ribbon ===== */
+348|.topbar{
+349|  display:flex;
+350|  justify-content:space-between;
+351|  align-items:center;
+352|  font-family:"VT323", monospace;
+353|  font-size:18px;
+354|  color:#ffe6c2;
+355|  letter-spacing:.12em;
+356|  text-transform:uppercase;
+357|  padding:6px 12px;
+358|  border-top:1px solid rgba(255,230,194,.35);
+359|  border-bottom:1px solid rgba(255,230,194,.35);
+360|  background:linear-gradient(90deg, rgba(255,61,110,0.15), rgba(255,138,60,0.15));
+361|  backdrop-filter:blur(2px);
+362|  -webkit-backdrop-filter:blur(2px);
+363|}
+364|.topbar .blink{ color:var(--hot-pink); animation:blink 1.1s steps(2) infinite;}
+365|@keyframes blink{ 50%{opacity:0;} }
+366|
+367|/* ===== Cover ===== */
+368|.cover{
+369|  position:relative;
+370|  margin-top:18px;
+371|  padding:42px 36px 56px;
+372|  background:
+373|    linear-gradient(180deg, rgba(247,230,200,0.96), rgba(239,212,163,0.96));
+374|  border:1px solid rgba(168,120,34,.35);
+375|  box-shadow:
+376|    inset 0 0 80px rgba(168,120,34,0.18),
+377|    0 30px 60px rgba(0,0,0,0.5);
+378|  overflow:hidden;
+379|}
+380|.cover::before{
+381|  content:"";
+382|  position:absolute;
+383|  inset:10px;
+384|  border:1px solid rgba(168,120,34,.45);
+385|  pointer-events:none;
+386|}
+387|.cover-brand{
+388|  font-family:"Bodoni Moda", serif;
+389|  font-weight:900;
+390|  font-style:italic;
+391|  font-size:14px;
+392|  letter-spacing:.4em;
+393|  color:var(--gold-deep);
+394|  text-transform:uppercase;
+395|}
+396|.cover-mast{
+397|  font-family:"Bodoni Moda", serif;
+398|  font-weight:900;
+399|  font-style:italic;
+400|  font-size:clamp(54px, 9vw, 110px);
+401|  line-height:.9;
+402|  margin:8px 0 0;
+403|  color:var(--magenta);
+404|  text-shadow:
+405|    0 0 1px rgba(0,0,0,.2),
+406|    0 2px 0 rgba(168,120,34,.25);
+407|  letter-spacing:-.02em;
+408|}
+409|.cover-mast .amp{
+410|  font-family:"Monoton", serif;
+411|  font-style:normal;
+412|  color:var(--sunset-1);
+413|  font-size:.7em;
+414|  vertical-align:.05em;
+415|}
+416|.cover-sub{
+417|  font-family:"Cormorant Garamond", serif;
+418|  font-style:italic;
+419|  font-size:22px;
+420|  margin:14px 0 0;
+421|  color:#3a1a14;
+422|  max-width:640px;
+423|}
+424|.cover-meta{
+425|  display:flex;
+426|  flex-wrap:wrap;
+427|  gap:18px 30px;
+428|  margin-top:28px;
+429|  font-family:"VT323", monospace;
+430|  font-size:18px;
+431|  color:#5a2a18;
+432|  letter-spacing:.1em;
+433|  text-transform:uppercase;
+434|  border-top:1px dashed rgba(168,120,34,.55);
+435|  border-bottom:1px dashed rgba(168,120,34,.55);
+436|  padding:10px 0;
+437|}
+438|.cover-meta b{ color:var(--magenta); font-weight:700; letter-spacing:.2em;}
+439|.cover-flags{
+440|  position:absolute;
+441|  top:18px; right:18px;
+442|  display:flex; gap:8px;
+443|  font-family:"VT323", monospace;
+444|  font-size:14px;
+445|  letter-spacing:.2em;
+446|}
+447|.flag{
+448|  padding:4px 10px;
+449|  border:1px solid #5a2a18;
+450|  color:#5a2a18;
+451|  background:rgba(255,235,200,.7);
+452|}
+453|.flag.hot{ background:var(--hot-pink); color:#fff; border-color:#fff;}
+454|
+455|/* ===== Mini cover line on top of mast ===== */
+456|.cover-teasers{
+457|  display:grid;
+458|  grid-template-columns:1fr 1fr 1fr;
+459|  gap:14px;
+460|  margin-top:34px;
+461|}
+462|.teaser{
+463|  border-left:3px solid var(--sunset-1);
+464|  padding:8px 12px;
+465|  background:rgba(255,255,255,.35);
+466|}
+467|.teaser .kicker{
+468|  font-family:"VT323", monospace;
+469|  font-size:14px;
+470|  letter-spacing:.25em;
+471|  color:var(--magenta);
+472|  text-transform:uppercase;
+473|}
+474|.teaser h4{
+475|  font-family:"Bodoni Moda", serif;
+476|  font-weight:800;
+477|  font-style:italic;
+478|  margin:2px 0 0;
+479|  font-size:20px;
+480|  color:var(--ink);
+481|  line-height:1.15;
+482|}
+483|
+484|/* ===== Body article style ===== */
+485|.section{
+486|  margin-top:46px;
+487|  background:linear-gradient(180deg, rgba(247,230,200,0.95), rgba(247,230,200,0.92));
+488|  border:1px solid rgba(168,120,34,.3);
+489|  padding:34px 34px 38px;
+490|  box-shadow:0 18px 40px rgba(0,0,0,0.35);
+491|  position:relative;
+492|}
+493|.section::after{
+494|  content:"";
+495|  position:absolute;
+496|  left:0; right:0; bottom:-6px;
+497|  height:6px;
+498|  background:repeating-linear-gradient(90deg, var(--hot-pink) 0 12px, var(--sunset-1) 12px 24px, var(--gold) 24px 36px);
+499|  opacity:.85;
+500|}
+501|.kicker{
+502|  font-family:"VT323", monospace;
+503|  letter-spacing:.3em;
+504|  color:var(--magenta);
+505|  text-transform:uppercase;
+506|  font-size:15px;
+507|}
+508|h2{
+509|  font-family:"Bodoni Moda", serif;
+510|  font-style:italic;
+511|  font-weight:900;
+512|  font-size:48px;
+513|  line-height:1;
+514|  margin:6px 0 18px;
+515|  color:var(--ink);
+516|}
+517|h2 em{ color:var(--magenta); font-style:italic;}
+518|.dropcap::first-letter{
+519|  font-family:"Bodoni Moda", serif;
+520|  font-weight:900;
+521|  font-style:italic;
+522|  float:left;
+523|  font-size:5.2em;
+524|  line-height:.85;
+525|  padding:6px 12px 0 0;
+526|  color:var(--magenta);
+527|  text-shadow:2px 2px 0 rgba(168,120,34,.25);
+528|}
+529|.section p{ margin:0 0 14px; }
+530|.columns-2{ column-count:2; column-gap:34px; }
+531|@media (max-width:700px){ .columns-2{ column-count:1; } }
+532|
+533|/* pull quote */
+534|.pull{
+535|  font-family:"Bodoni Moda", serif;
+536|  font-style:italic;
+537|  font-weight:700;
+538|  font-size:30px;
+539|  line-height:1.2;
+540|  color:var(--magenta);
+541|  border-top:2px solid var(--magenta);
+542|  border-bottom:2px solid var(--magenta);
+543|  padding:18px 0;
+544|  margin:24px 0;
+545|  text-align:center;
+546|  break-inside:avoid;
+547|}
+548|
+549|/* ===== Playmate / Cover Girl card ===== */
+550|.playmate{
+551|  display:grid;
+552|  grid-template-columns:1.1fr 1fr;
+553|  gap:28px;
+554|  align-items:stretch;
+555|}
+556|@media (max-width:780px){ .playmate{ grid-template-columns:1fr; } }
+557|.portrait{
+558|  position:relative;
+559|  aspect-ratio:3/4;
+560|  background:
+561|    radial-gradient(ellipse at 50% 30%, #ffd9b3 0%, #ffb27a 30%, transparent 60%),
+562|    linear-gradient(180deg, var(--sunset-1), var(--sunset-2) 45%, var(--sunset-3) 80%, var(--sunset-4));
+563|  border:1px solid rgba(168,120,34,.4);
+564|  overflow:hidden;
+565|  display:flex;
+566|  align-items:flex-end;
+567|  justify-content:flex-start;
+568|  padding:18px;
+569|  box-shadow:inset 0 0 80px rgba(0,0,0,.35);
+570|}
+571|.portrait .sun-mini{
+572|  position:absolute;
+573|  top:18%;
+574|  left:50%;
+575|  transform:translateX(-50%);
+576|  width:38%;
+577|  aspect-ratio:1/1;
+578|  border-radius:50%;
+579|  background:radial-gradient(circle, #fff2c8, #ffd27a 50%, #ffaa55);
+580|  box-shadow:0 0 60px rgba(255,200,120,.7);
+581|}
+582|.portrait .palm-cut{
+583|  position:absolute;
+584|  bottom:0; left:0; right:0; height:55%;
+585|  background:
+586|    radial-gradient(ellipse at 20% 100%, #0a0610 0%, #0a0610 25%, transparent 26%),
+587|    radial-gradient(ellipse at 80% 100%, #0a0610 0%, #0a0610 22%, transparent 23%),
+588|    linear-gradient(to top, #0a0610 0%, transparent 80%);
+589|}
+590|.portrait .silhouette{
+591|  position:absolute;
+592|  bottom:-2px;
+593|  left:50%;
+594|  transform:translateX(-50%);
+595|  width:70%;
+596|  height:85%;
+597|  filter:drop-shadow(0 0 10px rgba(0,0,0,.6));
+598|}
+599|.portrait .silhouette svg{
+600|  width:100%;
+601|  height:100%;
+602|  display:block;
+603|}
+604|.portrait .stamp{
+605|  position:relative;
+606|  z-index:2;
+607|  font-family:"VT323", monospace;
+608|  color:#fff;
+609|  letter-spacing:.25em;
+610|  font-size:14px;
+611|  text-transform:uppercase;
+612|  background:var(--hot-pink);
+613|  padding:4px 10px;
+614|  border:1px solid #fff;
+615|  align-self:flex-end;
+616|}
+617|
+618|.playmate-body h3{
+619|  font-family:"Bodoni Moda", serif;
+620|  font-style:italic;
+621|  font-weight:900;
+622|  font-size:36px;
+623|  margin:6px 0 8px;
+624|  color:var(--magenta);
+625|}
+626|.playmate-body .stats{
+627|  display:grid;
+628|  grid-template-columns:1fr 1fr;
+629|  gap:6px 18px;
+630|  margin:14px 0;
+631|  font-family:"VT323", monospace;
+632|  font-size:18px;
+633|  letter-spacing:.06em;
+634|  text-transform:uppercase;
+635|  color:#3a1a14;
+636|  border-top:1px dashed rgba(168,120,34,.55);
+637|  border-bottom:1px dashed rgba(168,120,34,.55);
+638|  padding:10px 0;
+639|}
+640|.playmate-body .stats span b{ color:var(--magenta); }
+641|
+642|/* ===== Reviews grid ===== */
+643|.reviews{
+644|  display:grid;
+645|  grid-template-columns:repeat(3, 1fr);
+646|  gap:18px;
+647|}
+648|@media (max-width:780px){ .reviews{ grid-template-columns:1fr; } }
+649|.review{
+650|  background:
+651|    linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,235,200,.55));
+652|  border:1px solid rgba(168,120,34,.4);
+653|  padding:16px;
+654|  position:relative;
+655|}
+656|.review .poster{
+657|  aspect-ratio:2/3;
+658|  background:
+659|    radial-gradient(ellipse at 60% 30%, rgba(255,200,140,.7), transparent 55%),
+660|    linear-gradient(180deg, var(--sunset-1), var(--sunset-2) 40%, var(--sunset-3) 75%, var(--sunset-4));
+661|  border:1px solid rgba(0,0,0,.3);
+662|  margin-bottom:12px;
+663|  position:relative;
+664|  overflow:hidden;
+665|  box-shadow:inset 0 0 40px rgba(0,0,0,.4);
+666|}
+667|.review .poster::before{
+668|  content:"";
+669|  position:absolute; inset:0;
+670|  background:
+671|    radial-gradient(circle at 50% 30%, #fff2c8 0 5%, transparent 6%),
+672|    radial-gradient(ellipse at 20% 100%, #0a0610 0 22%, transparent 23%),
+673|    radial-gradient(ellipse at 80% 100%, #0a0610 0 22%, transparent 23%);
+674|}
+675|.review .poster::after{
+676|  content:attr(data-title);
+677|  position:absolute;
+678|  left:8px; right:8px; bottom:8px;
+679|  font-family:"Bodoni Moda", serif;
+680|  font-weight:900;
+681|  font-style:italic;
+682|  font-size:22px;
+683|  line-height:1;
+684|  color:#fff;
+685|  text-shadow:1px 1px 0 #000;
+686|  text-transform:uppercase;
+687|  letter-spacing:.02em;
+688|}
+689|.review h4{
+690|  font-family:"Bodoni Moda", serif;
+691|  font-weight:800;
+692|  font-style:italic;
+693|  margin:0 0 4px;
+694|  font-size:22px;
+695|  color:var(--ink);
+696|}
+697|.review .year{
+698|  font-family:"VT323", monospace;
+699|  font-size:16px;
+700|  letter-spacing:.2em;
+701|  color:var(--magenta);
+702|  text-transform:uppercase;
+703|}
+704|.review p{ margin:6px 0 8px; font-size:16px;}
+705|.stars{
+706|  font-family:"VT323", monospace;
+707|  color:var(--gold-deep);
+708|  letter-spacing:.15em;
+709|  font-size:18px;
+710|}
+711|.stars b{ color:var(--magenta); }
+712|
+713|/* ===== Sidebar / links ===== */
+714|.contact{
+715|  display:grid;
+716|  grid-template-columns:1.2fr 1fr;
+717|  gap:28px;
+718|}
+719|@media (max-width:780px){ .contact{ grid-template-columns:1fr; } }
+720|.links a{
+721|  display:flex;
+722|  justify-content:space-between;
+723|  padding:12px 14px;
+724|  border-bottom:1px dashed rgba(168,120,34,.55);
+725|  color:var(--ink);
+726|  text-decoration:none;
+727|  font-family:"Bodoni Moda", serif;
+728|  font-style:italic;
+729|  font-size:20px;
+730|  transition:background .25s, color .25s, padding .25s;
+731|}
+732|.links a:hover{
+733|  background:var(--magenta);
+734|  color:#fff;
+735|  padding-left:22px;
+736|}
+737|.links a span{
+738|  font-family:"VT323", monospace;
+739|  letter-spacing:.2em;
+740|  font-style:normal;
+741|  font-size:15px;
+742|  color:var(--gold-deep);
+743|  align-self:center;
+744|}
+745|.links a:hover span{ color:#ffd27a; }
+746|
+747|/* ===== Footer ===== */
+748|footer{
+749|  margin-top:50px;
+750|  text-align:center;
+751|  font-family:"VT323", monospace;
+752|  letter-spacing:.2em;
+753|  color:#ffe6c2;
+754|  text-transform:uppercase;
+755|  font-size:16px;
+756|  opacity:.85;
+757|}
+758|footer .ribbon{
+759|  display:inline-block;
+760|  padding:8px 20px;
+761|  background:var(--magenta);
+762|  color:#fff;
+763|  border:1px solid #fff;
+764|  margin-bottom:12px;
+765|}
+766|
+767|/* logo placeholder (si ton image n'est pas présente) */
+768|.logo-spot{
+769|  display:flex;
+770|  align-items:center;
+771|  gap:14px;
+772|  margin-bottom:4px;
+773|}
+774|.logo-spot .badge{
+775|  width:52px; height:52px; border-radius:50%;
+776|  background:radial-gradient(circle, #fff2c8, #ffaa55 60%, #ff3d6e);
+777|  box-shadow:0 0 0 2px var(--gold-deep) inset, 0 0 30px rgba(255,80,140,.5);
+778|  display:flex; align-items:center; justify-content:center;
+779|  font-family:"Monoton", serif;
+780|  color:#3a1a14;
+781|  font-size:22px;
+782|}
+783|
+784|</style>
+785|</head>
+786|<body>
+787|
+788|<!-- BACKGROUND LAYERS -->
+789|<div class="sky"></div>
+790|<div class="sun" aria-hidden="true"></div>
+791|<div class="ocean"></div>
+792|<div class="palms" aria-hidden="true">
+793|  <div class="palm palm-1"><i></i><i></i><i></i><i></i></div>
+794|  <div class="palm palm-2"><i></i><i></i><i></i><i></i></div>
+795|  <div class="palm palm-3"><i></i><i></i><i></i><i></i></div>
+796|  <div class="palm palm-4"><i></i><i></i><i></i><i></i></div>
+797|</div>
+798|
+799|<!-- FX LAYERS -->
+800|<div class="grain"></div>
+801|<div class="scanlines"></div>
+802|<div class="vignette"></div>
+803|<div class="vhs-bar"></div>
+804|
+805|<!-- MAGAZINE -->
+806|<div class="frame">
+807|
+808|  <div class="topbar">
+809|    <span>Sidaris French Connection — Vol. VIII</span>
+810|    <span><span class="blink">●</span> REC &nbsp; SP &nbsp; 00:08:32:14</span>
+811|    <span>Été 1987 · 12 F</span>
+812|  </div>
+813|
+814|  <!-- COVER -->
+815|  <section class="cover">
+816|    <div class="cover-flags">
+817|      <span class="flag">N°08</span>
+818|      <span class="flag hot">HOT</span>
+819|    </div>
+820|
+821|    <div class="logo-spot">
+822|      <div class="badge">S</div>
+823|      <div class="cover-brand">Sidaris &nbsp;·&nbsp; French &nbsp;·&nbsp; Connection</div>
+824|    </div>
+825|
+826|    <h1 class="cover-mast">
+827|      <span class="glitch" data-text="Bullets,">Bullets,</span><br>
+828|      <span class="glitch" data-text="Bombs">Bombs</span> <span class="amp">&amp;</span> <span class="glitch" data-text="Babes">Babes</span>
+829|    </h1>
+830|
+831|    <p class="cover-sub">
+832|      Édition spéciale Hawaï — Plages dorées, silencieux dorés, et une certaine idée du septième art au-delà du raisonnable.
+833|    </p>
+834|
+835|    <div class="cover-meta">
+836|      <span><b>Inside</b> · L'interview d'été</span>
+837|      <span><b>Exclusif</b> · Le making-of de “Picasso Trigger”</span>
+838|      <span><b>Dossier</b> · La filière VHS française</span>
+839|    </div>
+840|
+841|    <div class="cover-teasers">
+842|      <div class="teaser">
+843|        <div class="kicker">Cover Girl</div>
+844|        <h4>Dona Speir, la lionne de Molokai</h4>
+845|      </div>
+846|      <div class="teaser">
+847|        <div class="kicker">Reportage</div>
+848|        <h4>48h dans la jungle avec L.E.T.H.A.L.</h4>
+849|      </div>
+850|      <div class="teaser">
+851|        <div class="kicker">Critique</div>
+852|        <h4>Hard Ticket to Hawaii — l'éloge du serpent</h4>
+853|      </div>
+854|    </div>
+855|  </section>
+856|
+857|  <!-- EDITO -->
+858|  <section class="section">
+859|    <div class="kicker">Édito · L'été sera chaud</div>
+860|    <h2>Lettre depuis <em>Honolulu</em></h2>
+861|
+862|    <div class="columns-2">
+863|      <p class="dropcap">
+864|        Il y a des cinéastes qui filment la mer comme on filmerait un sermon : avec respect, distance, et une touche de mélancolie. Andy Sidaris, lui, filmait la mer comme un type qui sait que dans deux heures il aura un cocktail à la main et un hélicoptère en feu derrière lui. Voilà tout le contrat. Voilà toute la promesse.
+865|      </p>
+866|
+867|      <p>
+868|        Bienvenue dans le huitième numéro de <em>Sidaris French Connection</em>, fanzine français entièrement dévoué à la filmographie la plus indéfendable et la plus joyeuse des années 80 et 90. Ici on ne s'excuse pas, on commente. Ici on ne juge pas, on archive. Ici on ne fait pas semblant : on aime ça.
+869|      </p>
+870|
+871|      <p class="pull">« Un téléphone explose, un palmier tombe, un soutien-gorge se déclipse. Le cinéma d'Andy, c'est un théorème. »</p>
+872|
+873|      <p>
+874|        Dans ce numéro, nous remontons jusqu'à Molokai, nous interrogeons les acteurs qui ont eu la chance ou l'audace de courir torse nu sur du sable noir, et nous rendons enfin justice à ces films que Canal Plus diffusait en troisième partie de soirée pendant que vos parents dormaient.
+875|      </p>
+876|
+877|      <p>
+878|        Bonne lecture, gardez du rhum au frais, et n'oubliez jamais : <em>la cassette n'est pas morte, elle est juste en pause sur la bonne image</em>.
+879|      </p>
+880|    </div>
+881|  </section>
+882|
+883|  <!-- COVER GIRL -->
+884|  <section class="section">
+885|    <div class="kicker">Cover Girl · Issue 08</div>
+886|    <h2>La <em>playmate</em> du mois</h2>
+887|
+888|    <div class="playmate">
+889|      <div class="portrait" aria-hidden="true">
+890|        <div class="sun-mini"></div>
+891|        <div class="silhouette">
+892|          <svg viewBox="0 0 200 320" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+893|            <defs>
+894|              <linearGradient id="silg" x1="0" y1="0" x2="0" y2="1">
+895|                <stop offset="0%" stop-color="#0a0610"/>
+896|                <stop offset="100%" stop-color="#1a0510"/>
+897|              </linearGradient>
+898|            </defs>
+899|            <!-- pin-up silhouette : tête, épaules, taille, hanches, jambes, bras levé -->
+900|            <path fill="url(#silg)" d="
+901|              M100,22
+902|              c-12,0 -22,10 -22,22
+903|              c0,9 5,17 12,21
+904|              c-2,4 -3,8 -3,12
+905|              c-1,6 -10,8 -16,12
+906|              c-9,5 -16,12 -20,22
+907|              c-3,8 0,16 4,22
+908|              c-3,4 -4,10 -3,16
+909|              c2,12 8,22 6,34
+910|              c-2,12 -7,22 -10,32
+911|              c-2,8 -1,18 3,26
+912|              c5,10 7,22 6,34
+913|              c-1,10 -3,20 -2,30
+914|              c1,7 6,12 12,14
+915|              l4,2
+916|              l-2,8
+917|              l34,0
+918|              l-1,-8
+919|              c8,-2 14,-8 14,-18
+920|              c0,-12 -2,-24 0,-36
+921|              c2,-10 6,-20 6,-30
+922|              c0,-10 -4,-18 -8,-26
+923|              c1,-10 4,-20 4,-30
+924|              c0,-10 -4,-18 -8,-24
+925|              c4,-6 6,-14 4,-22
+926|              c-2,-10 -8,-18 -16,-22
+927|              c4,-3 8,-7 10,-12
+928|              c1,-3 1,-7 0,-10
+929|              c5,-4 8,-11 8,-19
+930|              c0,-13 -10,-23 -22,-23 Z"/>
+931|            <!-- cheveux longs flottant -->
+932|            <path fill="url(#silg)" d="
+933|              M78,30
+934|              c-6,8 -10,18 -10,30
+935|              c0,14 6,26 12,38
+936|              c-8,4 -14,12 -16,22
+937|              c-2,10 0,20 4,28
+938|              c-4,4 -6,10 -6,16
+939|              c0,8 4,14 8,18
+940|              l8,-2
+941|              c-2,-10 0,-20 4,-28
+942|              c4,-10 6,-22 4,-32
+943|              c-2,-10 -2,-20 2,-28
+944|              c2,-6 6,-12 6,-20
+945|              c0,-10 -6,-18 -16,-22 Z"/>
+946|            <!-- bras levé qui prolonge la silhouette -->
+947|            <path fill="url(#silg)" d="
+948|              M126,78
+949|              c4,-12 12,-22 22,-28
+950|              c4,-2 8,-2 10,2
+951|              c2,4 0,8 -4,10
+952|              c-8,4 -14,12 -16,22
+953|              c-1,6 -3,10 -6,12
+954|              l-6,-18 Z"/>
+955|          </svg>
+956|        </div>
+957|        <div class="palm-cut"></div>
+958|        <div class="stamp">Cover · 1987</div>
+959|      </div>
+960|      <div class="playmate-body">
+961|        <div class="kicker">Exclusif · Interview à Maui</div>
+962|        <h3>Lola « Sunset » Marchetti</h3>
+963|
+964|        <div class="stats">
+965|          <span><b>Origine</b> Nice, France</span>
+966|          <span><b>Signe</b> Lion ascendant Walther PPK</span>
+967|          <span><b>Vu dans</b> Code Tropico, Killer Bikini Force</span>
+968|          <span><b>Boisson</b> Mai Tai, deux glaçons</span>
+969|        </div>
+970|
+971|        <p>
+972|          On l'a rencontrée sur la plage à 6h du matin. Le maquilleur dormait encore, le réalisateur jurait en italien, et Lola, elle, rechargeait un Beretta factice avec le calme d'une joueuse de poker. « En France on m'a dit que je n'étais pas assez sérieuse, » nous confie-t-elle dans un sourire qui vaut un visa américain. « Andy m'a dit : ma chérie, ici on ne fait pas dans le sérieux. On fait dans l'inoubliable. »
+973|        </p>
+974|        <p>
+975|          Trois films plus tard, Lola est devenue l'un des visages les plus reconnaissables de la galaxie Sidaris. Elle nous parle de ses cascades, de ses doublures, de ses débuts au théâtre à Antibes, et de cette scène culte au lance-roquettes qu'elle a tournée pieds nus, à marée basse, en moins de quatre prises.
+976|        </p>
+977|      </div>
+978|    </div>
+979|  </section>
+980|
+981|  <!-- REVIEWS -->
+982|  <section class="section">
+983|    <div class="kicker">Critiques · La bande VHS</div>
+984|    <h2>Trois <em>séries B</em> à passer en boucle</h2>
+985|
+986|    <div class="reviews">
+987|      <article class="review">
+988|        <div class="poster" data-title="Hard Ticket to Hawaii"></div>
+989|        <div class="year">1987 · 96 min</div>
+990|        <h4>Hard Ticket to Hawaii</h4>
+991|        <p>Un serpent contaminé, deux agents en bikini, un type sur skate qui se prend une poupée gonflable en pleine tronche. Le chef-d'œuvre absolu de la maison Sidaris. À voir, à revoir, à recommander à son curé.</p>
+992|        <div class="stars">★★★★★ <b>Note : 5/5</b></div>
+993|      </article>
+994|
+995|      <article class="review">
+996|        <div class="poster" data-title="Picasso Trigger"></div>
+997|        <div class="year">1988 · 99 min</div>
+998|        <h4>Picasso Trigger</h4>
+999|        <p>Vengeance, lance-grenades dissimulés dans des planches de surf, et un méchant qui peint comme s'il devait quelque chose au cubisme. Le scénario tient sur un sous-bock, l'ambiance tient sur un océan entier.</p>
+1000|        <div class="stars">★★★★☆ <b>Note : 4/5</b></div>
+1001|      </article>
+1002|
+1003|      <article class="review">
+1004|        <div class="poster" data-title="Savage Beach"></div>
+1005|        <div class="year">1989 · 90 min</div>
+1006|        <h4>Savage Beach</h4>
+1007|        <p>Un trésor japonais, une île perdue, deux héroïnes qui sortent indemnes d'absolument tout. Sidaris invente ici un genre : le néo-pulp tropical à crémaillère. C'est bête, c'est beau, c'est doré comme un coucher de soleil sur Lanai.</p>
+1008|        <div class="stars">★★★★☆ <b>Note : 4/5</b></div>
+1009|      </article>
+1010|    </div>
+1011|  </section>
+1012|
+1013|  <!-- DOSSIER / À PROPOS -->
+1014|  <section class="section">
+1015|    <div class="kicker">Le Fan Club · Mode d'emploi</div>
+1016|    <h2>À <em>propos</em> de nous</h2>
+1017|
+1018|    <div class="columns-2">
+1019|      <p>
+1020|        Sidaris French Connection est une association informelle de cinéphiles, de collectionneurs de jaquettes plastifiées, et de gens qui croient sincèrement qu'on peut écrire une thèse sur l'utilisation du téléobjectif dans <em>Guns</em> (1990). Nous vulgarisons, nous sous-titrons, nous archivons, nous projetons. Et oui, parfois, nous buvons.
+1021|      </p>
+1022|      <p>
+1023|        Nos missions tiennent en quatre verbes : <em>traduire</em> les films jamais distribués chez nous, <em>retracer</em> les carrières parallèles des actrices, <em>écrire</em> des critiques honnêtes mais affectueuses, et <em>organiser</em> des projections clandestines dans des arrière-salles de bar où ça sent la friteuse et le rhum.
+1024|      </p>
+1025|      <p>
+1026|        Nous sommes ouverts à toutes les bonnes volontés : traducteurs, graphistes, juristes (oui, il en faut), DJs, projectionnistes, et bien sûr aux héritiers spirituels d'un certain cinéma américain qui n'avait pas peur du soleil.
+1027|      </p>
+1028|    </div>
+1029|  </section>
+1030|
+1031|  <!-- CONTACT -->
+1032|  <section class="section">
+1033|    <div class="kicker">Connexion · Le carnet d'adresses</div>
+1034|    <h2>Où nous <em>trouver</em></h2>
+1035|
+1036|    <div class="contact">
+1037|      <div>
+1038|        <p>
+1039|          On se réunit en visio, en bord de mer, dans des cinémas associatifs, et sur les réseaux qui veulent bien encore de nous. Voici les coordonnées officielles de la rédaction. Pour le reste, frappez à la porte de la salle 3 du Méliès, prononcez le mot <em>« Honolulu »</em>, et on vous laisse entrer.
+1040|        </p>
+1041|        <p>
+1042|          Adhésion annuelle : un sourire, une cassette, ou cinq euros si vous insistez. Newsletter trimestrielle. Goodies sérigraphiés à la main par un graphiste qui a vu trop de films.
+1043|        </p>
+1044|      </div>
+1045|
+1046|      <div class="links">
+1047|        <a href="https://www.instagram.com/sidarisfrenchconnection" target="_blank" rel="noopener">Instagram <span>@sidarisfrenchconnection ›</span></a>
+1048|        <a href="https://www.senscritique.com/SidarisFrenchConnect" target="_blank" rel="noopener">SensCritique <span>profil ›</span></a>
+1049|        <a href="https://linktr.ee/SidarisFrenchConnection" target="_blank" rel="noopener">Linktree <span>hub ›</span></a>
+1050|        <a href="#">Newsletter <span>s'abonner ›</span></a>
+1051|        <a href="#">Projections <span>agenda ›</span></a>
+1052|      </div>
+1053|    </div>
+1054|  </section>
+1055|
+1056|  <footer>
+1057|    <div class="ribbon">© Sidaris French Connection — Archive cinéma d'exploitation</div>
+1058|    <div>Vol. VIII · Été 1987 · Imprimé quelque part entre Nice et Honolulu</div>
+1059|  </footer>
+1060|
+1061|</div>
+1062|
+1063|<script>
+1064|/* poussière dorée flottante */
+1065|(function(){
+1066|  const n = 60;
+1067|  const variants = ["", "big", "tiny"];
+1068|  for(let i=0;i<n;i++){
+1069|    const d = document.createElement("div");
+1070|    d.className = "dust " + variants[i % variants.length];
+1071|    d.style.left = (Math.random()*100) + "vw";
+1072|    d.style.top  = (Math.random()*100) + "vh";
+1073|    d.style.animationDuration = (5 + Math.random()*9) + "s";
+1074|    d.style.animationDelay = (-Math.random()*10) + "s";
+1075|    document.body.appendChild(d);
+1076|  }
+1077|})();
+1078|</script>
+1079|
+1080|</body>
+1081|</html>
+1082|
+[End of file]
